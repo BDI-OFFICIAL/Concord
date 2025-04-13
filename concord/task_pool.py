@@ -1,8 +1,10 @@
 import asyncio
 import logging
-from typing import Callable, Dict, Optional
+from typing import Callable, Dict, Optional, TypeVar
 
 from curl_cffi import AsyncSession
+
+QueueType = TypeVar("QueueType", bound=asyncio.Queue)
 
 logger = logging.getLogger("Concord")
 
@@ -10,7 +12,7 @@ logger = logging.getLogger("Concord")
 class TaskPool:
     def __init__(
             self,
-            task_queue: asyncio.Queue,
+            task_queue: QueueType,
             num_workers: int,
             tasks_per_worker: int,
             session_params: Optional[Dict] = None,
