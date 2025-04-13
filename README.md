@@ -20,7 +20,7 @@ Just initialize `TaskPool` class, and you're ready to run()!
 Install the package via pip:
 
 ```bash
-pip install https://github.com/BDI-OFFICIAL/concord/archive/refs/heads/main.zip
+pip install https://github.com/BDI-OFFICIAL/Concord/archive/refs/heads/main.zip
 ```
 
 ---
