@@ -60,10 +60,10 @@ class AsyncRunner:
             if self.run_continuously:
                 return await asyncio.Future()
 
-            await asyncio.gather(*worker_tasks, return_exceptions=True)
+            return await asyncio.gather(*worker_tasks, return_exceptions=True)
 
         except asyncio.CancelledError:
             for worker in worker_tasks:
                 worker.cancel()
 
-            await asyncio.gather(*worker_tasks, return_exceptions=True)
+            return await asyncio.gather(*worker_tasks, return_exceptions=True)
