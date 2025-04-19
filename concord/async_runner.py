@@ -2,9 +2,19 @@ import asyncio
 import logging
 from typing import Callable, TypeVar
 
-QueueType = TypeVar("QueueType", bound=asyncio.Queue)
-
 logger = logging.getLogger("Concord")
+logger.setLevel(logging.INFO)
+
+if not logger.handlers:
+    console_handler = logging.StreamHandler()
+    console_handler.setLevel(logging.INFO)
+    formatter = logging.Formatter('%(asctime)s - %(name)s - %(levelname)s - %(message)s')
+    console_handler.setFormatter(formatter)
+    logger.addHandler(console_handler)
+
+logger.propagate = True
+
+QueueType = TypeVar("QueueType", bound=asyncio.Queue)
 
 
 class AsyncRunner:
