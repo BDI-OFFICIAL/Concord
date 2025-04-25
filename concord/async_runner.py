@@ -38,7 +38,7 @@ class AsyncRunner:
                             return  # Exit worker when getter is done
 
                         task = asyncio.create_task(
-                            self._task_handler(function=function, data=data, *args, **kwargs)
+                            self._task_handler(function, data, *args, **kwargs)
                         )
 
                         active_tasks.add(task)
