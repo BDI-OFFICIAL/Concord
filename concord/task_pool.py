@@ -83,7 +83,7 @@ class TaskPool:
                     while True:
                         while len(active_tasks) < self.tasks_per_worker:
                             task = asyncio.create_task(
-                                self._task_handler(function=function, session=session, *args, **kwargs)
+                                self._task_handler(function, session, *args, **kwargs)
                             )
 
                             active_tasks.add(task)
