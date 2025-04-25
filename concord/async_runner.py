@@ -62,8 +62,8 @@ class AsyncRunner:
 
             return await asyncio.gather(*worker_tasks, return_exceptions=True)
 
-        except asyncio.CancelledError:
+        except (KeyboardInterrupt, SystemExit, asyncio.CancelledError):
             for worker in worker_tasks:
                 worker.cancel()
 
-            return await asyncio.gather(*worker_tasks, return_exceptions=True)
+            return None
