@@ -2,19 +2,9 @@ import asyncio
 import logging
 from typing import Callable, TypeVar
 
-logger = logging.getLogger("Concord")
-logger.setLevel(logging.INFO)
-
-if not logger.handlers:
-    console_handler = logging.StreamHandler()
-    console_handler.setLevel(logging.INFO)
-    formatter = logging.Formatter('%(asctime)s - %(name)s - %(levelname)s - %(message)s')
-    console_handler.setFormatter(formatter)
-    logger.addHandler(console_handler)
-
-logger.propagate = True
-
 QueueType = TypeVar("QueueType", bound=asyncio.Queue)
+
+logger = logging.getLogger("Concord")
 
 
 class AsyncRunner:
@@ -72,8 +62,8 @@ class AsyncRunner:
 
             return await asyncio.gather(*worker_tasks, return_exceptions=True)
 
-        except asyncio.CancelledError:
+        except (KeyboardInterrupt, SystemExit, asyncio.CancelledError):
             for worker in worker_tasks:
                 worker.cancel()
 
-            return await asyncio.gather(*worker_tasks, return_exceptions=True)
+            return None
