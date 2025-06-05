@@ -16,8 +16,7 @@ class TaskPool:
             num_workers: int,
             tasks_per_worker: int,
             session_params: Optional[Dict] = None,
-            run_continuously: bool = True,
-
+            run_continuously: bool = True
     ):
         """
         TaskPool is designed to execute a user-specified function concurrently using asynchronous requests,
